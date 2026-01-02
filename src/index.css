@@ -152,6 +152,24 @@
   }
 }
 
+@keyframes hud-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes hud-pulse {
+  0%, 100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
 .animate-pulse-glow {
   animation: pulse-glow 2s ease-in-out infinite;
 }
@@ -178,6 +196,19 @@
 
 .animate-typing-dot-3 {
   animation: typing-dots 1.4s ease-in-out 0.4s infinite;
+}
+
+.animate-hud-rotate {
+  animation: hud-rotate 60s linear infinite;
+}
+
+.animate-hud-pulse {
+  animation: hud-pulse 2s ease-in-out infinite;
+}
+
+/* Radial gradient utility */
+.bg-gradient-radial {
+  background: radial-gradient(circle, var(--tw-gradient-from), var(--tw-gradient-to));
 }
 
 /* Scrollbar styling */
