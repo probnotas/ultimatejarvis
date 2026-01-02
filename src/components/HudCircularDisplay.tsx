@@ -15,8 +15,8 @@ export function HudCircularDisplay({ isRecording, isProcessing, onClick, disable
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setRotation((r) => (r + 0.3) % 360);
-      setInnerRotation((r) => (r - 0.5) % 360);
+      setRotation(r => (r + 0.3) % 360);
+      setInnerRotation(r => (r - 0.5) % 360);
     }, 50);
     return () => clearInterval(interval);
   }, []);
@@ -24,15 +24,18 @@ export function HudCircularDisplay({ isRecording, isProcessing, onClick, disable
   return (
     <div className="relative w-[320px] h-[320px] md:w-[400px] md:h-[400px]">
       {/* Outer ring with markers */}
-      <div
-        className="absolute inset-0 rounded-full border border-primary/20 flex items-center justify-center"
+      <div 
+        className="absolute inset-0 rounded-full border border-primary/20"
         style={{ transform: `rotate(${rotation}deg)` }}
       >
         {/* Ring markers */}
         {Array.from({ length: 60 }).map((_, i) => (
           <div
             key={i}
-            className={cn("absolute w-0.5 bg-primary/40", i % 5 === 0 ? "h-3" : "h-1.5")}
+            className={cn(
+              "absolute w-0.5 bg-primary/40",
+              i % 5 === 0 ? "h-3" : "h-1.5"
+            )}
             style={{
               left: "50%",
               top: "0",
@@ -44,7 +47,7 @@ export function HudCircularDisplay({ isRecording, isProcessing, onClick, disable
       </div>
 
       {/* Second rotating ring */}
-      <div
+      <div 
         className="absolute inset-4 rounded-full border-2 border-primary/30"
         style={{ transform: `rotate(${innerRotation}deg)` }}
       >
@@ -66,7 +69,7 @@ export function HudCircularDisplay({ isRecording, isProcessing, onClick, disable
       </div>
 
       {/* Third ring - data ring */}
-      <div
+      <div 
         className="absolute inset-10 rounded-full border border-primary/40"
         style={{ transform: `rotate(${rotation * 1.5}deg)` }}
       >
@@ -82,32 +85,27 @@ export function HudCircularDisplay({ isRecording, isProcessing, onClick, disable
               transform: `translateX(-50%) rotate(${i * 30}deg)`,
             }}
           >
-            <div
-              className={cn(
-                "h-full bg-primary/60 rounded-sm transition-all duration-300",
-                isRecording && "animate-pulse",
-              )}
-              style={{ width: `${30 + Math.random() * 70}%` }}
-            />
+            <div className={cn(
+              "h-full bg-primary/60 rounded-sm transition-all duration-300",
+              isRecording && "animate-pulse"
+            )} style={{ width: `${30 + Math.random() * 70}%` }} />
           </div>
         ))}
       </div>
 
       {/* Inner glow ring */}
-      <div
-        className={cn(
-          "absolute inset-16 rounded-full border-2 transition-all duration-300",
-          isRecording
-            ? "border-primary shadow-[0_0_30px_hsl(var(--primary)),inset_0_0_30px_hsl(var(--primary)/0.3)]"
-            : "border-primary/50 shadow-[0_0_15px_hsl(var(--primary)/0.5)]",
-        )}
-      />
+      <div className={cn(
+        "absolute inset-16 rounded-full border-2 transition-all duration-300",
+        isRecording 
+          ? "border-primary shadow-[0_0_30px_hsl(var(--primary)),inset_0_0_30px_hsl(var(--primary)/0.3)]" 
+          : "border-primary/50 shadow-[0_0_15px_hsl(var(--primary)/0.5)]"
+      )} />
 
       {/* Core display */}
       <div className="absolute inset-20 rounded-full bg-background/80 backdrop-blur border border-primary/30 flex items-center justify-center">
         {/* Inner decorative ring */}
         <div className="absolute inset-4 rounded-full border border-primary/20" />
-
+        
         {/* Center button */}
         <button
           onClick={onClick}
@@ -119,24 +117,19 @@ export function HudCircularDisplay({ isRecording, isProcessing, onClick, disable
             "disabled:opacity-50 disabled:cursor-not-allowed",
             isRecording
               ? "border-primary bg-primary/30 shadow-[0_0_40px_hsl(var(--primary))]"
-              : "border-primary/50 bg-primary/10 hover:bg-primary/20 hover:border-primary",
+              : "border-primary/50 bg-primary/10 hover:bg-primary/20 hover:border-primary"
           )}
-        >
-          {/* Glowing pulse core when idle */}
-          {!isRecording && !isProcessing && (
-            <div className="absolute inset-4 rounded-full bg-primary/20 animate-pulse shadow-[0_0_20px_hsl(var(--primary)/0.6),0_0_40px_hsl(var(--primary)/0.3)]" />
-          )}
-        </button>
+        />
       </div>
 
       {/* Date indicator at bottom */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 font-mono text-[10px] text-primary/60 tracking-widest">
-        {new Date().toLocaleDateString("en-US", { day: "numeric", month: "short" }).toUpperCase()}
+        {new Date().toLocaleDateString('en-US', { day: 'numeric', month: 'short' }).toUpperCase()}
       </div>
 
       {/* Time indicator */}
       <div className="absolute top-[45%] left-1/2 -translate-x-1/2 -translate-y-full font-mono text-xs text-primary/50">
-        {new Date().toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: true })}
+        {new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true })}
       </div>
     </div>
   );
