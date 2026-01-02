@@ -47,7 +47,38 @@ export function HudCircularDisplay({
         {/* Inner decorative ring */}
         <div className="absolute inset-4 rounded-full border border-primary/20" />
 
-        {/* Rotating ring around center button */}
+        {/* Outer rotating ring around center button */}
+        <div 
+          className="absolute w-48 h-48 md:w-56 md:h-56 rounded-full"
+          style={{ transform: `rotate(${-innerRotation * 1.5}deg)` }}
+        >
+          <svg className="w-full h-full" viewBox="0 0 100 100">
+            {/* Dashed rotating ring */}
+            <circle
+              cx="50"
+              cy="50"
+              r="46"
+              fill="none"
+              stroke="hsl(var(--primary))"
+              strokeWidth="1"
+              strokeDasharray="12 6"
+              className="opacity-40"
+            />
+            {/* Accent markers */}
+            {[0, 60, 120, 180, 240, 300].map((angle) => (
+              <circle
+                key={angle}
+                cx={50 + 46 * Math.cos((angle * Math.PI) / 180)}
+                cy={50 + 46 * Math.sin((angle * Math.PI) / 180)}
+                r="1.5"
+                fill="hsl(var(--primary))"
+                className="opacity-60"
+              />
+            ))}
+          </svg>
+        </div>
+
+        {/* Inner rotating ring around center button */}
         <div 
           className="absolute w-36 h-36 md:w-44 md:h-44 rounded-full"
           style={{ transform: `rotate(${rotation * 2}deg)` }}
