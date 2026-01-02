@@ -127,10 +127,6 @@ export function HudCircularDisplay({ isRecording, isProcessing, onClick, disable
         {new Date().toLocaleDateString('en-US', { day: 'numeric', month: 'short' }).toUpperCase()}
       </div>
 
-      {/* Time indicator */}
-      <div className="absolute top-[45%] left-1/2 -translate-x-1/2 -translate-y-full font-mono text-xs text-primary/50">
-        {new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true })}
-      </div>
     </div>
   );
 }
