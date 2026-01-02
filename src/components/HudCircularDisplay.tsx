@@ -25,7 +25,7 @@ export function HudCircularDisplay({ isRecording, isProcessing, onClick, disable
     <div className="relative w-[320px] h-[320px] md:w-[400px] md:h-[400px]">
       {/* Outer ring with markers */}
       <div 
-        className="absolute inset-0 rounded-full border border-primary/20"
+        className="absolute inset-0 rounded-full border border-primary/20 flex items-center justify-center"
         style={{ transform: `rotate(${rotation}deg)` }}
       >
         {/* Ring markers */}
@@ -39,7 +39,7 @@ export function HudCircularDisplay({ isRecording, isProcessing, onClick, disable
             style={{
               left: "50%",
               top: "0",
-              transformOrigin: "50% 160px",
+              transformOrigin: "center 160px",
               transform: `translateX(-50%) rotate(${i * 6}deg)`,
             }}
           />
