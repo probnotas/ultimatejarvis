@@ -132,8 +132,8 @@ const Index = () => {
           </div>
         </div>
 
-        {/* Center - Main display (absolutely centered) */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
+        {/* Center - Main display */}
+        <div className="flex-1 flex flex-col items-center justify-center px-4 py-8">
           {/* Title */}
           <div className="mb-8 text-center">
             <h1 className="text-2xl md:text-3xl font-mono font-bold tracking-[0.3em] text-primary">
