@@ -1,36 +1,31 @@
-import { Cloud } from "lucide-react";
+import { useWeather } from '@/hooks/useWeather';
 
 export function HudWeather() {
+  const { weather, isLoading } = useWeather();
+
   return (
-    <div className="flex flex-col items-center gap-2">
-      {/* Weather label */}
-      <div className="text-[10px] font-mono text-muted-foreground tracking-widest uppercase">
-        Mostly Cloudy
+    <div className="flex flex-col items-center gap-1 font-mono">
+      {/* Location */}
+      <div className="text-[10px] text-primary/60 tracking-widest uppercase">
+        {weather?.location || 'Brampton'}
+      </div>
+      
+      {/* Weather description */}
+      <div className="text-[9px] text-muted-foreground tracking-wider">
+        {isLoading ? 'Loading...' : weather?.description || '--'}
       </div>
       
       {/* Temperature display */}
-      <div className="relative">
-        <div className="w-20 h-20 rounded-full border-2 border-primary/50 flex items-center justify-center bg-primary/5">
-          <span className="text-3xl font-mono font-bold text-primary">30</span>
-          <span className="text-sm font-mono text-primary/70 absolute top-4 right-3">°</span>
-        </div>
-        {/* Decorative ring */}
-        <svg className="absolute inset-0 w-full h-full -rotate-90">
-          <circle
-            cx="40"
-            cy="40"
-            r="38"
-            fill="none"
-            stroke="hsl(var(--primary) / 0.3)"
-            strokeWidth="2"
-            strokeDasharray="4 4"
-          />
-        </svg>
+      <div className="flex items-baseline gap-1">
+        <span className="text-2xl font-bold text-primary">
+          {isLoading ? '--' : weather?.temperature ?? '--'}
+        </span>
+        <span className="text-sm text-primary/70">°C</span>
       </div>
 
-      {/* Analysis label */}
-      <div className="text-[8px] font-mono text-muted-foreground/60 tracking-wider mt-1">
-        Atmospheric<br />Analysis
+      {/* Feels like */}
+      <div className="text-[9px] text-muted-foreground/70 tracking-wider">
+        Feels like {isLoading ? '--' : weather?.feelsLike ?? '--'}°C
       </div>
     </div>
   );
