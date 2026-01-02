@@ -119,15 +119,7 @@ export function HudCircularDisplay({ isRecording, isProcessing, onClick, disable
               ? "border-primary bg-primary/30 shadow-[0_0_40px_hsl(var(--primary))]"
               : "border-primary/50 bg-primary/10 hover:bg-primary/20 hover:border-primary"
           )}
-        >
-          {isProcessing ? (
-            <Loader2 className="h-8 w-8 md:h-10 md:w-10 text-primary animate-spin" />
-          ) : isRecording ? (
-            <MicOff className="h-8 w-8 md:h-10 md:w-10 text-primary" />
-          ) : (
-            <Mic className="h-8 w-8 md:h-10 md:w-10 text-primary" />
-          )}
-        </button>
+        />
       </div>
 
       {/* Date indicator at bottom */}
