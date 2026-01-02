@@ -48,64 +48,26 @@ export function HudCircularDisplay({
         <div className="absolute inset-4 rounded-full border border-primary/20" />
 
         {/* Outer rotating ring around center button */}
-        <div 
-          className="absolute w-72 h-72 md:w-96 md:h-96 rounded-full"
-          style={{ transform: `rotate(${-innerRotation * 1.5}deg)` }}
-        >
+        <div className="absolute w-72 h-72 md:w-96 md:h-96 rounded-full" style={{
+        transform: `rotate(${-innerRotation * 1.5}deg)`
+      }}>
           <svg className="w-full h-full" viewBox="0 0 100 100">
             {/* Dashed rotating ring */}
-            <circle
-              cx="50"
-              cy="50"
-              r="46"
-              fill="none"
-              stroke="hsl(var(--primary))"
-              strokeWidth="1"
-              strokeDasharray="12 6"
-              className="opacity-40"
-            />
+            <circle cx="50" cy="50" r="46" fill="none" stroke="hsl(var(--primary))" strokeWidth="1" strokeDasharray="12 6" className="opacity-40" />
             {/* Accent markers */}
-            {[0, 60, 120, 180, 240, 300].map((angle) => (
-              <circle
-                key={angle}
-                cx={50 + 46 * Math.cos((angle * Math.PI) / 180)}
-                cy={50 + 46 * Math.sin((angle * Math.PI) / 180)}
-                r="1.5"
-                fill="hsl(var(--primary))"
-                className="opacity-60"
-              />
-            ))}
+            {[0, 60, 120, 180, 240, 300].map(angle => <circle key={angle} cx={50 + 46 * Math.cos(angle * Math.PI / 180)} cy={50 + 46 * Math.sin(angle * Math.PI / 180)} r="1.5" fill="hsl(var(--primary))" className="opacity-60" />)}
           </svg>
         </div>
 
         {/* Inner rotating ring around center button */}
-        <div 
-          className="absolute w-36 h-36 md:w-44 md:h-44 rounded-full"
-          style={{ transform: `rotate(${rotation * 2}deg)` }}
-        >
+        <div className="absolute w-36 h-36 md:w-44 md:h-44 rounded-full" style={{
+        transform: `rotate(${rotation * 2}deg)`
+      }}>
           <svg className="w-full h-full" viewBox="0 0 100 100">
             {/* Dashed rotating ring */}
-            <circle
-              cx="50"
-              cy="50"
-              r="46"
-              fill="none"
-              stroke="hsl(var(--primary))"
-              strokeWidth="1.5"
-              strokeDasharray="8 4"
-              className="opacity-60"
-            />
+            <circle cx="50" cy="50" r="46" fill="none" stroke="hsl(var(--primary))" strokeWidth="1.5" strokeDasharray="8 4" className="opacity-60" />
             {/* Accent markers */}
-            {[0, 90, 180, 270].map((angle) => (
-              <circle
-                key={angle}
-                cx={50 + 46 * Math.cos((angle * Math.PI) / 180)}
-                cy={50 + 46 * Math.sin((angle * Math.PI) / 180)}
-                r="2"
-                fill="hsl(var(--primary))"
-                className="opacity-80"
-              />
-            ))}
+            {[0, 90, 180, 270].map(angle => <circle key={angle} cx={50 + 46 * Math.cos(angle * Math.PI / 180)} cy={50 + 46 * Math.sin(angle * Math.PI / 180)} r="2" fill="hsl(var(--primary))" className="opacity-80" />)}
           </svg>
         </div>
 
@@ -117,12 +79,7 @@ export function HudCircularDisplay({
       </div>
 
       {/* Date indicator at bottom */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 font-mono text-[10px] text-primary/60 tracking-widest">
-        {new Date().toLocaleDateString("en-US", {
-        day: "numeric",
-        month: "short"
-      }).toUpperCase()}
-      </div>
+      
 
       {/* Time indicator */}
       
