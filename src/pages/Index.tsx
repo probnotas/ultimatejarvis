@@ -198,15 +198,6 @@ const Index = () => {
             <HudQuickLinks />
           </div>
 
-          {/* Bottom right - Weather */}
-          <div className="flex flex-col items-end gap-4">
-            <div className="text-right">
-              <p className="text-xs font-mono text-primary/50 tracking-wider mb-2">
-                KARTIK'S SYSTEM
-              </p>
-            </div>
-            <HudWeather />
-          </div>
         </div>
       </div>
 
