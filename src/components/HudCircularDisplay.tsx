@@ -28,35 +28,32 @@ export function HudCircularDisplay({
       transform: `rotate(${rotation}deg)`
     }}>
         {/* Ring markers */}
-        {Array.from({ length: 60 }).map((_, i) => (
-          <div key={i} className="absolute w-0.5 h-1 bg-primary/30" style={{
-            top: '0', left: '50%', transform: `rotate(${i * 6}deg)`, transformOrigin: '50% 160px'
-          }} />
-        ))}
+        {Array.from({
+        length: 60
+      }).map((_, i) => <div key={i} className="absolute w-0.5 h-1 bg-primary/30" style={{
+        top: '0',
+        left: '50%',
+        transform: `rotate(${i * 6}deg)`,
+        transformOrigin: '50% 160px'
+      }} />)}
       </div>
 
       {/* Second rotating ring */}
-      <div className="absolute inset-4 rounded-full border-2 border-primary/30" style={{
-      transform: `rotate(${innerRotation}deg)`
-    }}>
-        {/* Chevron markers */}
-        {Array.from({ length: 24 }).map((_, i) => (
-          <div key={i} className="absolute w-1 h-1 bg-primary/50 rounded-full" style={{
-            top: '0', left: '50%', transform: `rotate(${i * 15}deg)`, transformOrigin: '50% 140px'
-          }} />
-        ))}
-      </div>
+      
 
       {/* Third ring - data ring */}
       <div className="absolute inset-10 rounded-full border border-primary/40" style={{
       transform: `rotate(${rotation * 1.5}deg)`
     }}>
         {/* Data blocks */}
-        {Array.from({ length: 12 }).map((_, i) => (
-          <div key={i} className="absolute w-2 h-0.5 bg-primary/60" style={{
-            top: '0', left: '50%', transform: `rotate(${i * 30}deg)`, transformOrigin: '50% 100px'
-          }} />
-        ))}
+        {Array.from({
+        length: 12
+      }).map((_, i) => <div key={i} className="absolute w-2 h-0.5 bg-primary/60" style={{
+        top: '0',
+        left: '50%',
+        transform: `rotate(${i * 30}deg)`,
+        transformOrigin: '50% 100px'
+      }} />)}
       </div>
 
       {/* Inner glow ring */}
@@ -65,48 +62,37 @@ export function HudCircularDisplay({
       {/* Core display */}
       <div className="absolute inset-20 rounded-full bg-background/80 backdrop-blur border border-primary/30 flex items-center justify-center">
         {/* Rotating ring 1 - outer */}
-        <div 
-          className="absolute inset-2 rounded-full border border-primary/40 border-dashed"
-          style={{ transform: `rotate(${rotation * 2}deg)` }}
-        />
+        <div className="absolute inset-2 rounded-full border border-primary/40 border-dashed" style={{
+        transform: `rotate(${rotation * 2}deg)`
+      }} />
         
         {/* Rotating ring 2 - middle */}
-        <div 
-          className="absolute inset-4 rounded-full border-2 border-primary/30"
-          style={{ transform: `rotate(${innerRotation * 1.5}deg)` }}
-        >
+        <div className="absolute inset-4 rounded-full border-2 border-primary/30" style={{
+        transform: `rotate(${innerRotation * 1.5}deg)`
+      }}>
           {/* Ring segments */}
-          {Array.from({ length: 8 }).map((_, i) => (
-            <div
-              key={i}
-              className="absolute w-1 h-1 rounded-full bg-primary/60"
-              style={{
-                top: '50%',
-                left: '50%',
-                transform: `rotate(${i * 45}deg) translateY(-50%) translateX(-50%) translateY(-100%)`,
-              }}
-            />
-          ))}
+          {Array.from({
+          length: 8
+        }).map((_, i) => <div key={i} className="absolute w-1 h-1 rounded-full bg-primary/60" style={{
+          top: '50%',
+          left: '50%',
+          transform: `rotate(${i * 45}deg) translateY(-50%) translateX(-50%) translateY(-100%)`
+        }} />)}
         </div>
         
         {/* Rotating ring 3 - inner */}
-        <div 
-          className="absolute inset-6 rounded-full border border-primary/50"
-          style={{ transform: `rotate(${rotation * -3}deg)` }}
-        >
+        <div className="absolute inset-6 rounded-full border border-primary/50" style={{
+        transform: `rotate(${rotation * -3}deg)`
+      }}>
           {/* Tick marks */}
-          {Array.from({ length: 12 }).map((_, i) => (
-            <div
-              key={i}
-              className="absolute w-0.5 h-2 bg-primary/40"
-              style={{
-                top: '0',
-                left: '50%',
-                transform: `translateX(-50%) rotate(${i * 30}deg)`,
-                transformOrigin: '50% 100%',
-              }}
-            />
-          ))}
+          {Array.from({
+          length: 12
+        }).map((_, i) => <div key={i} className="absolute w-0.5 h-2 bg-primary/40" style={{
+          top: '0',
+          left: '50%',
+          transform: `translateX(-50%) rotate(${i * 30}deg)`,
+          transformOrigin: '50% 100%'
+        }} />)}
         </div>
 
         {/* Center button */}
