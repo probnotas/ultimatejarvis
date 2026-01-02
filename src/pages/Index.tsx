@@ -116,9 +116,10 @@ const Index = () => {
       <div className="relative z-10 min-h-screen flex">
         {/* Left panel */}
         <div className="hidden lg:flex flex-col justify-between p-6 w-64">
-          {/* Top left - Clock */}
-          <div>
+          {/* Top left - Clock & Weather */}
+          <div className="flex flex-col gap-4">
             <HudClock />
+            <HudWeather />
           </div>
 
           {/* Middle left - Stats */}
