@@ -127,7 +127,7 @@ const Index = () => {
           </div>
 
           {/* Bottom left - Communication */}
-          <div>
+          <div className="fixed bottom-6 left-6">
             <HudCommunication />
           </div>
         </div>
