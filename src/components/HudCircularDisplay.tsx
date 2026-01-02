@@ -30,16 +30,18 @@ export function HudCircularDisplay({
         {/* Ring markers */}
         {Array.from({
         length: 60
-      }).map((_, i) => <div key={i} className="absolute w-0.5 h-1 bg-primary/30" style={{
-        top: '0',
-        left: '50%',
-        transform: `rotate(${i * 6}deg)`,
-        transformOrigin: '50% 160px'
-      }} />)}
+      }).map((_, i) => {})}
       </div>
 
       {/* Second rotating ring */}
-      
+      <div className="absolute inset-4 rounded-full border-2 border-primary/30" style={{
+      transform: `rotate(${innerRotation}deg)`
+    }}>
+        {/* Chevron markers */}
+        {Array.from({
+        length: 24
+      }).map((_, i) => {})}
+      </div>
 
       {/* Third ring - data ring */}
       <div className="absolute inset-10 rounded-full border border-primary/40" style={{
@@ -48,12 +50,7 @@ export function HudCircularDisplay({
         {/* Data blocks */}
         {Array.from({
         length: 12
-      }).map((_, i) => <div key={i} className="absolute w-2 h-0.5 bg-primary/60" style={{
-        top: '0',
-        left: '50%',
-        transform: `rotate(${i * 30}deg)`,
-        transformOrigin: '50% 100px'
-      }} />)}
+      }).map((_, i) => {})}
       </div>
 
       {/* Inner glow ring */}
@@ -61,39 +58,8 @@ export function HudCircularDisplay({
 
       {/* Core display */}
       <div className="absolute inset-20 rounded-full bg-background/80 backdrop-blur border border-primary/30 flex items-center justify-center">
-        {/* Rotating ring 1 - outer */}
-        <div className="absolute inset-2 rounded-full border border-primary/40 border-dashed" style={{
-        transform: `rotate(${rotation * 2}deg)`
-      }} />
-        
-        {/* Rotating ring 2 - middle */}
-        <div className="absolute inset-4 rounded-full border-2 border-primary/30" style={{
-        transform: `rotate(${innerRotation * 1.5}deg)`
-      }}>
-          {/* Ring segments */}
-          {Array.from({
-          length: 8
-        }).map((_, i) => <div key={i} className="absolute w-1 h-1 rounded-full bg-primary/60" style={{
-          top: '50%',
-          left: '50%',
-          transform: `rotate(${i * 45}deg) translateY(-50%) translateX(-50%) translateY(-100%)`
-        }} />)}
-        </div>
-        
-        {/* Rotating ring 3 - inner */}
-        <div className="absolute inset-6 rounded-full border border-primary/50" style={{
-        transform: `rotate(${rotation * -3}deg)`
-      }}>
-          {/* Tick marks */}
-          {Array.from({
-          length: 12
-        }).map((_, i) => <div key={i} className="absolute w-0.5 h-2 bg-primary/40" style={{
-          top: '0',
-          left: '50%',
-          transform: `translateX(-50%) rotate(${i * 30}deg)`,
-          transformOrigin: '50% 100%'
-        }} />)}
-        </div>
+        {/* Inner decorative ring */}
+        <div className="absolute inset-4 rounded-full border border-primary/20" />
 
         {/* Center button */}
         <button onClick={onClick} disabled={disabled || isProcessing} className={cn("relative z-10 flex h-20 w-20 md:h-24 md:w-24 items-center justify-center rounded-full", "border-2 transition-all duration-300", "focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background", "disabled:opacity-50 disabled:cursor-not-allowed", isRecording ? "border-primary bg-primary/30 shadow-[0_0_40px_hsl(var(--primary))]" : "border-primary/50 bg-primary/10 hover:bg-primary/20 hover:border-primary")}>
