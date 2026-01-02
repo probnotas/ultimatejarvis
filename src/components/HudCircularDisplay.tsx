@@ -49,7 +49,7 @@ export function HudCircularDisplay({
 
         {/* Outer rotating ring around center button */}
         <div 
-          className="absolute w-60 h-60 md:w-72 md:h-72 rounded-full"
+          className="absolute w-72 h-72 md:w-96 md:h-96 rounded-full"
           style={{ transform: `rotate(${-innerRotation * 1.5}deg)` }}
         >
           <svg className="w-full h-full" viewBox="0 0 100 100">
