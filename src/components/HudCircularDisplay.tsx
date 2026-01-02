@@ -121,7 +121,12 @@ export function HudCircularDisplay({ isRecording, isProcessing, onClick, disable
               ? "border-primary bg-primary/30 shadow-[0_0_40px_hsl(var(--primary))]"
               : "border-primary/50 bg-primary/10 hover:bg-primary/20 hover:border-primary",
           )}
-        />
+        >
+          {/* Glowing pulse core when idle */}
+          {!isRecording && !isProcessing && (
+            <div className="absolute inset-4 rounded-full bg-primary/20 animate-pulse shadow-[0_0_20px_hsl(var(--primary)/0.6),0_0_40px_hsl(var(--primary)/0.3)]" />
+          )}
+        </button>
       </div>
 
       {/* Date indicator at bottom */}
