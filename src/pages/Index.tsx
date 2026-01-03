@@ -5,6 +5,7 @@ import { HudStats } from "@/components/HudStats";
 import { HudQuickLinks } from "@/components/HudQuickLinks";
 import { HudWeather } from "@/components/HudWeather";
 import { HudCommunication } from "@/components/HudCommunication";
+import { ElevenLabsWidget } from "@/components/ElevenLabsWidget";
 import { HudArcReactor } from "@/components/HudArcReactor";
 import { ChatMessage } from "@/components/ChatMessage";
 import { TypingIndicator } from "@/components/TypingIndicator";
@@ -204,6 +205,9 @@ const Index = () => {
 
       {/* Bottom decorative line */}
       <div className="fixed bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
+
+      {/* ElevenLabs Conversational AI Widget */}
+      <ElevenLabsWidget />
     </div>
   );
 };
