@@ -1,33 +1,96 @@
-import { useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
+import { HudCircularDisplay } from "@/components/HudCircularDisplay";
 import { HudClock } from "@/components/HudClock";
 import { HudStats } from "@/components/HudStats";
 import { HudQuickLinks } from "@/components/HudQuickLinks";
 import { HudWeather } from "@/components/HudWeather";
 import { HudCommunication } from "@/components/HudCommunication";
 import { HudArcReactor } from "@/components/HudArcReactor";
+import { ChatMessage } from "@/components/ChatMessage";
+import { TypingIndicator } from "@/components/TypingIndicator";
+import { useVoiceRecognition } from "@/hooks/useVoiceRecognition";
+import { useWebhook } from "@/hooks/useWebhook";
+import { useToast } from "@/hooks/use-toast";
 
-// Declare the custom element for TypeScript
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      'elevenlabs-convai': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement> & { 'agent-id': string }, HTMLElement>;
-    }
-  }
+interface Message {
+  id: string;
+  text: string;
+  isUser: boolean;
+  timestamp: Date;
 }
 
-const Index = () => {
-  // Load ElevenLabs widget script
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.src = 'https://unpkg.com/@elevenlabs/convai-widget-embed@beta';
-    script.async = true;
-    script.type = 'text/javascript';
-    document.body.appendChild(script);
+// Configure your webhook URL here
+const WEBHOOK_URL = "https://your-webhook-url.com/api/jarvis";
 
-    return () => {
-      document.body.removeChild(script);
+const Index = () => {
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [status, setStatus] = useState<"idle" | "listening" | "processing" | "error">("idle");
+  const [showChat, setShowChat] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const { toast } = useToast();
+
+  const { sendMessage, isLoading } = useWebhook({ webhookUrl: WEBHOOK_URL });
+
+  const handleTranscript = async (transcript: string) => {
+    setShowChat(true);
+    const userMessage: Message = {
+      id: Date.now().toString(),
+      text: transcript,
+      isUser: true,
+      timestamp: new Date(),
     };
-  }, []);
+    setMessages((prev) => [...prev, userMessage]);
+    setStatus("processing");
+
+    const response = await sendMessage(transcript);
+
+    if (response) {
+      const jarvisMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        text: response,
+        isUser: false,
+        timestamp: new Date(),
+      };
+      setMessages((prev) => [...prev, jarvisMessage]);
+      setStatus("idle");
+    } else {
+      const demoMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        text: `I received your message: "${transcript}". Configure the webhook URL to get real responses.`,
+        isUser: false,
+        timestamp: new Date(),
+      };
+      setMessages((prev) => [...prev, demoMessage]);
+      setStatus("idle");
+    }
+  };
+
+  const handleError = (error: string) => {
+    setStatus("error");
+    toast({
+      variant: "destructive",
+      title: "Voice Recognition Error",
+      description: error,
+    });
+    setTimeout(() => setStatus("idle"), 2000);
+  };
+
+  const { isRecording, isSupported, toggleRecording } = useVoiceRecognition({
+    onTranscript: handleTranscript,
+    onError: handleError,
+  });
+
+  useEffect(() => {
+    if (isRecording) {
+      setStatus("listening");
+    } else if (!isLoading && status === "listening") {
+      setStatus("idle");
+    }
+  }, [isRecording, isLoading, status]);
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
   return (
     <div className="relative min-h-screen bg-background overflow-hidden">
@@ -78,21 +141,54 @@ const Index = () => {
               JARVIS
             </h1>
             <p className="text-[10px] font-mono text-muted-foreground tracking-[0.5em] mt-1">
-              VOICE ASSISTANT READY
+              SYSTEM ONLINE
             </p>
           </div>
 
-          {/* ElevenLabs Conversational AI Widget */}
-          <div className="relative">
-            <elevenlabs-convai agent-id="agent_3401ke0jrj6yfa7t08sfqh226qrw"></elevenlabs-convai>
-          </div>
+          {/* Circular display */}
+          <HudCircularDisplay
+            isRecording={isRecording}
+            isProcessing={isLoading}
+            onClick={toggleRecording}
+            disabled={!isSupported}
+          />
 
           {/* Status text */}
           <div className="mt-8 text-center">
             <p className="text-xs font-mono text-primary/60 tracking-widest">
-              CLICK THE ORB TO BEGIN CONVERSATION
+              {isRecording ? "● LISTENING..." : isLoading ? "◎ PROCESSING..." : "○ AWAITING INPUT"}
             </p>
+            {!isSupported && (
+              <p className="text-xs text-destructive/70 mt-2 font-mono">
+                VOICE RECOGNITION UNAVAILABLE
+              </p>
+            )}
           </div>
+
+          {/* Chat overlay */}
+          {showChat && messages.length > 0 && (
+            <div className="fixed bottom-4 left-4 right-4 md:left-auto md:right-4 md:w-96 max-h-64 overflow-y-auto bg-background/90 backdrop-blur border border-primary/30 rounded-lg p-4 space-y-3 z-40">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-[10px] font-mono text-primary/60 tracking-wider">COMMUNICATION LOG</span>
+                <button 
+                  onClick={() => setShowChat(false)}
+                  className="text-primary/40 hover:text-primary text-xs"
+                >
+                  ✕
+                </button>
+              </div>
+              {messages.map((message) => (
+                <ChatMessage
+                  key={message.id}
+                  message={message.text}
+                  isUser={message.isUser}
+                  timestamp={message.timestamp}
+                />
+              ))}
+              {isLoading && <TypingIndicator />}
+              <div ref={messagesEndRef} />
+            </div>
+          )}
         </div>
 
         {/* Right panel */}
