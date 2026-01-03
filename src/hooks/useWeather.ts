@@ -14,6 +14,9 @@ export function useWeather() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    let retryCount = 0;
+    const maxRetries = 3;
+
     const fetchWeather = async () => {
       try {
         setIsLoading(true);
@@ -25,9 +28,16 @@ export function useWeather() {
         
         setWeather(data);
         setError(null);
+        retryCount = 0;
       } catch (err) {
         console.error('Error fetching weather:', err);
         setError('Failed to fetch weather');
+        
+        // Retry on failure (useful during initial edge function deployment)
+        if (retryCount < maxRetries) {
+          retryCount++;
+          setTimeout(fetchWeather, 2000);
+        }
       } finally {
         setIsLoading(false);
       }
