@@ -14,7 +14,7 @@ declare global {
 export const ElevenLabsWidget = () => {
   return (
     <div className="fixed bottom-6 right-6 z-50">
-      <elevenlabs-convai agent-id="agent_3401ke0jrj6yfa7t08sfqh226qrw"></elevenlabs-convai>
+      <elevenlabs-convai agent-id="agent_2801ke0v4g33f8hsq1ddj07mn6tb"></elevenlabs-convai>
     </div>
   );
 };
