@@ -4,7 +4,7 @@ export function HudWeather() {
   const { weather, isLoading } = useWeather();
 
   return (
-    <div className="flex flex-col items-center gap-1 font-mono">
+    <div className="flex flex-col items-start gap-1 font-mono">
       {/* Location */}
       <div className="text-[10px] text-primary/60 tracking-widest uppercase">
         {weather?.location || 'Brampton'}
