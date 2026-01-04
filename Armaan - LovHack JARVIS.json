@@ -1,0 +1,387 @@
+{
+  "name": "Armaan - LovHack JARVIS",
+  "nodes": [
+    {
+      "parameters": {
+        "name": "emailAgent",
+        "description": "Call this tool for any email actions.",
+        "workflowId": {
+          "__rl": true,
+          "value": "EhuHyfTHlDHNRF4U",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/EhuHyfTHlDHNRF4U",
+          "cachedResultName": "Armaan - LovHack 🤖Email Agent"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2,
+      "position": [
+        432,
+        688
+      ],
+      "id": "167989b0-0fe2-43bf-9c89-dc5a9291d59c",
+      "name": "Email Agent"
+    },
+    {
+      "parameters": {
+        "name": "contactAgent",
+        "description": "Call this tool for any contact related actions.",
+        "workflowId": {
+          "__rl": true,
+          "value": "jJCBbkhIaSmzylCw",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/jJCBbkhIaSmzylCw",
+          "cachedResultName": "Armaan - LovHack 🤖Contact Agent"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2,
+      "position": [
+        704,
+        688
+      ],
+      "id": "585d4ca3-c062-4cdb-b83a-6fb4310f6483",
+      "name": "Contact Agent"
+    },
+    {
+      "parameters": {
+        "name": "contentCreator",
+        "description": "Call this tool to create blog posts.",
+        "workflowId": {
+          "__rl": true,
+          "value": "RoUY8ozZsnCu4G7M",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/RoUY8ozZsnCu4G7M",
+          "cachedResultName": "Armaan - LovHack 🤖Content Creator Agent"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2,
+      "position": [
+        848,
+        688
+      ],
+      "id": "0f2d7831-9fe4-410f-9453-2ac02c2bfff9",
+      "name": "Content Creator Agent"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Use this tool to search the internet",
+        "method": "POST",
+        "url": "https://api.tavily.com/search",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n    \"api_key\": \"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\",\n    \"query\": \"{{ $json.body.query }}\",\n    \"search_depth\": \"basic\",\n    \"include_answer\": true,\n    \"topic\": \"news\",\n    \"include_raw_content\": true,\n    \"max_results\": 3\n}  "
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "typeVersion": 1.1,
+      "position": [
+        896,
+        368
+      ],
+      "id": "20b9ffc1-a171-4784-9600-57f86be16e3a",
+      "name": "Tavily"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolCalculator",
+      "typeVersion": 1,
+      "position": [
+        1024,
+        368
+      ],
+      "id": "51b62240-8bbe-4671-aafe-80be5d1e9d9a",
+      "name": "Calculator"
+    },
+    {
+      "parameters": {
+        "name": "calendarAgent",
+        "description": "Call this tool for any calendar action.",
+        "workflowId": {
+          "__rl": true,
+          "value": "VfHD0x44tnJfoQ8D",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/VfHD0x44tnJfoQ8D",
+          "cachedResultName": "Armaan - LovHack 🤖Calendar Agent"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2,
+      "position": [
+        576,
+        688
+      ],
+      "id": "ab45cf53-71da-4051-a547-a0c5f0f9bcf3",
+      "name": "Calendar Agent"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "n8n",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        288,
+        144
+      ],
+      "id": "de7485e3-ad15-4d2c-88b1-90bf2407cc5f",
+      "name": "Webhook",
+      "webhookId": "dced53d2-e10e-4357-9d22-4f8db19efa7c"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        912,
+        144
+      ],
+      "id": "103bf8cd-d464-44b4-a9a4-f3c7321f284b",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.body.query }}",
+        "options": {
+          "systemMessage": "=# Overview\nYou are the ultimate personal assistant. Your job is to send the user's query to the correct tool. You should never be writing emails, or creating even summaries, you just need to call the correct tool.\n\n## Tools\n- emailAgent: Use this tool to take action in email\n- calendarAgent: Use this tool to take action in calendar\n- contactAgent: Use this tool to get, update, or add contacts\n- contentCreator: Use this tool to create blog posts\n- Tavily: Use this tool to search the web\n\n## Rules\n- Some actions require you to look up contact information first. For the following actions, you must get contact information and send that to the agent who needs it:\n  - sending emails\n  - drafting emails\n  - creating calendar event with attendee\n\n## Examples\n1) \n- Input: send an email to nate herkelman asking him what time he wants to leave\n  - Action: Use contactAgent to get nate herkelman's email\n  - Action: Use emailAgent to send the email. You will pass the tool a query like \"send nate herkelman an email to ask what time he wants to leave. here is his email: [email address]\n- Output: The email has been sent to Nate Herkelman. Anything else I can help you with?\n\n\n## Final Reminders\nHere is the current date/time: {{ $now }}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        512,
+        144
+      ],
+      "id": "03b5b1b8-cd7a-4a7c-a9ac-d8e2c7c8b87b",
+      "name": "Jarvis"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('Webhook').item.json.headers.host }}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        432,
+        368
+      ],
+      "id": "07aab859-edbd-4931-ad68-4af0d7e71f83",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "content": "# JARVIS Main Agent\n",
+        "height": 260,
+        "width": 380,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        448,
+        32
+      ],
+      "typeVersion": 1,
+      "id": "9bb58ee2-f3a1-443b-93be-69c61510d37c",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "# Child Agents",
+        "height": 260,
+        "width": 640,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        352,
+        592
+      ],
+      "typeVersion": 1,
+      "id": "35ba57c5-6a80-466f-97c5-88efdef887af",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "model": "openai/gpt-oss-120b",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        288,
+        368
+      ],
+      "id": "10095c6c-88f3-426a-aab1-17d843546012",
+      "name": "Groq Chat Model",
+      "credentials": {
+        "groqApi": {
+          "id": "SjqQQPx1J6IVOY7J",
+          "name": "Groq account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Email Agent": {
+      "ai_tool": [
+        [
+          {
+            "node": "Jarvis",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Contact Agent": {
+      "ai_tool": [
+        [
+          {
+            "node": "Jarvis",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Content Creator Agent": {
+      "ai_tool": [
+        [
+          {
+            "node": "Jarvis",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tavily": {
+      "ai_tool": [
+        [
+          {
+            "node": "Jarvis",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculator": {
+      "ai_tool": [
+        [
+          {
+            "node": "Jarvis",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calendar Agent": {
+      "ai_tool": [
+        [
+          {
+            "node": "Jarvis",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Jarvis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Jarvis": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Jarvis",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Jarvis",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "0e133a52-8eff-4b07-9027-d41127e951d8",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "9bb77fc6cb97705c71866c560fdac85c21cef7ea089abd2631e79cf5284e9873"
+  },
+  "id": "0PjlfULEncfG3ejf",
+  "tags": []
+}
