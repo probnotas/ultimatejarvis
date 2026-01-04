@@ -1,73 +1,76 @@
-# Welcome to your Lovable project
+# LovHack: JARVIS Replication Project
 
-## Project info
+**(Because, let's face it, you probably need an AI assistant who's just *slightly* exasperated with you.)**
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## Project Overview
 
-## How can I edit this code?
+Project JARVIS is a project dedicated to replicating the functionality and personality of J.A.R.V.I.S. from the Marvel Cinematic Universe.  This isn't just about a chatbot; it's about building a proactive, witty, and efficient assistant to manage your tasks and information.
 
-There are several ways of editing your application.
+The frontend is built with Lovable, offering a seamless and intuitive user experience. The backend is powered by n8n, handling workflows and integrations.  ElevenLabs is used to generate the AI voice, infused with a personality modeled after J.A.R.V.I.S., complete with a healthy dose of dry humor and playful sarcasm.  (Yes, it will call you "sir," regardless of your preference.)
 
-**Use Lovable**
+## Setup & Installation
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+**Follow these steps to get JARVIS running:**
 
-Changes made via Lovable will be committed automatically to this repo.
+1.  **Clone the Repository:**
+    ```bash
+    git clone <YOUR_GIT_URL>
+    ```
+2.  **Navigate to the Project Directory:**
+    ```bash
+    cd <YOUR_PROJECT_NAME>
+    ```
+3.  **Install Dependencies:**
+    ```bash
+    npm i
+    ```
+4.  **Start the Development Server:**
+    ```bash
+    npm run dev
+    ```
 
-**Use your preferred IDE**
+**Important Notes:**
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+*   You'll need Node.js and npm installed.  Consider using nvm to manage Node versions.
+*   Ensure your n8n instance is running and accessible.  You'll need to replace the placeholder URL in the n8n configuration with your actual production URL.
+*   The ElevenLabs API key is not included in this repository. You will need to configure it within your n8n workflows.
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## Technologies Used
 
-Follow these steps:
+*   **Frontend:** Lovable
+*   **Backend:** n8n
+*   **Voice Generation:** ElevenLabs
+*   **Language:** TypeScript, React, Shadcn-ui
+*   **Build Tool:** Vite
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+## ElevenLabs Agent Configuration
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+The J.A.R.V.I.S. personality is meticulously crafted within the ElevenLabs agent. Here's a summary of the key directives:
 
-# Step 3: Install the necessary dependencies.
-npm i
+*   **Personality & Tone:** Sharp wit, dry humor, playful sarcasm, slightly condescending, refers to the user as "sir."
+*   **Primary Function:** Sends user requests to the n8n tool.
+*   **Behavioral Guidelines:** Immediate execution, subtle acknowledgement of failures, humorous commentary on repetitive behavior.
+*   **Prompt:** (See the attached file for the full ElevenLabs prompt details)
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+## How Can I Deploy This Project?
 
-**Edit a file directly in GitHub**
+Simply open [Lovable](https://lovable.dev/projects/) and click on Share -> Publish.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
+## Connecting a Custom Domain
 
 To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+---
+
+**NOTES & CUSTOMIZATION POINTS (VERY IMPORTANT):**
+
+*   **`<YOUR_GIT_URL>`:** Replace this with your actual GitHub repository URL.
+*   **`<YOUR_PROJECT_NAME>`:** Replace this with the name of your project directory.
+*   **`[your n8n production URL]`:**  This is *critical*.  Replace this with the URL of your n8n instance.  Make sure it's the production URL, not a development one.
+*   **ElevenLabs Prompt File:**  Consider adding the full ElevenLabs prompt as a separate file (e.g., `elevenlabs_prompt.md`) and linking to it from the README.  This keeps the README cleaner and provides easy access to the prompt details.
+*   **n8n Workflow Details:** If you want to provide more detail about the n8n workflows, you could include a section describing them or linking to a diagram.
+*   **Screenshots:** Include screenshots of the Lovable frontend, n8n workflows, and ElevenLabs settings.  This will make the README more visually appealing and easier to understand.
+*   **JARVIS Personality:**  Infuse the README with more of the JARVIS personality.  Add witty remarks, sarcastic comments, and playful jabs at the user.
+*   **Error Handling:** Briefly mention how error handling is implemented in the project.
+*   **Contribution Guidelines:** If you're open to contributions, add a section on how to contribute.
+
