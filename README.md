@@ -12,22 +12,14 @@ The frontend is built with Lovable, offering a seamless and intuitive user exper
 
 **Follow these steps to get JARVIS running:**
 
-1.  **Clone the Repository:**
-    ```bash
-    git clone <YOUR_GIT_URL>
-    ```
-2.  **Navigate to the Project Directory:**
-    ```bash
-    cd <YOUR_PROJECT_NAME>
-    ```
-3.  **Install Dependencies:**
-    ```bash
-    npm i
-    ```
-4.  **Start the Development Server:**
-    ```bash
-    npm run dev
-    ```
+1.  **Download all FRONT END files in the Repository:**
+2.  **Upload them into Lovable or any other Vibecoding Tool**
+3.  **Download all BACK END files in the Repository:**
+4.  **Import each file into a different workflow**
+5.  **Add your own credentials in n8n and connect it with each workflow**
+6.  **Make a blank agent in Eleven Labs and follow everything on elevenlabs_prompts.md**
+7.  **Publish, and import embed code, located on the Widgets Tab, back to your Vibecoding Tool**
+8. **Activate n8n main workflow**
 
 **Important Notes:**
 
