@@ -23,6 +23,29 @@ export function HudArcReactor() {
           strokeWidth="1"
           strokeDasharray="4 2"
         />
+        {/* Tech lines - horizontal */}
+        <line x1="8" y1="48" x2="20" y2="48" stroke="hsl(var(--primary) / 0.5)" strokeWidth="1" />
+        <line x1="76" y1="48" x2="88" y2="48" stroke="hsl(var(--primary) / 0.5)" strokeWidth="1" />
+        {/* Tech lines - vertical */}
+        <line x1="48" y1="8" x2="48" y2="20" stroke="hsl(var(--primary) / 0.5)" strokeWidth="1" />
+        <line x1="48" y1="76" x2="48" y2="88" stroke="hsl(var(--primary) / 0.5)" strokeWidth="1" />
+        {/* Diagonal tech lines */}
+        <line x1="16" y1="16" x2="26" y2="26" stroke="hsl(var(--primary) / 0.4)" strokeWidth="0.5" />
+        <line x1="70" y1="16" x2="80" y2="26" stroke="hsl(var(--primary) / 0.4)" strokeWidth="0.5" />
+        <line x1="16" y1="80" x2="26" y2="70" stroke="hsl(var(--primary) / 0.4)" strokeWidth="0.5" />
+        <line x1="70" y1="80" x2="80" y2="70" stroke="hsl(var(--primary) / 0.4)" strokeWidth="0.5" />
+        {/* Small tick marks */}
+        {[0, 30, 60, 120, 150, 210, 240, 300, 330].map((angle) => (
+          <line
+            key={angle}
+            x1={48 + 42 * Math.cos((angle * Math.PI) / 180)}
+            y1={48 + 42 * Math.sin((angle * Math.PI) / 180)}
+            x2={48 + 46 * Math.cos((angle * Math.PI) / 180)}
+            y2={48 + 46 * Math.sin((angle * Math.PI) / 180)}
+            stroke="hsl(var(--primary) / 0.6)"
+            strokeWidth="1"
+          />
+        ))}
       </svg>
 
       {/* Main reactor */}
