@@ -18,11 +18,11 @@ export function HudArcReactor() {
     return () => clearInterval(pulseInterval);
   }, []);
 
-  // Calculate pulsing opacity values
-  const pulseOpacity1 = 0.3 + 0.4 * Math.sin((pulse * Math.PI) / 50);
-  const pulseOpacity2 = 0.3 + 0.4 * Math.sin(((pulse + 25) * Math.PI) / 50);
-  const pulseOpacity3 = 0.3 + 0.4 * Math.sin(((pulse + 50) * Math.PI) / 50);
-
+  // Calculate pulsing opacity values - more dramatic range
+  const pulseOpacity1 = 0.2 + 0.8 * Math.sin((pulse * Math.PI) / 50);
+  const pulseOpacity2 = 0.2 + 0.8 * Math.sin(((pulse + 25) * Math.PI) / 50);
+  const pulseOpacity3 = 0.2 + 0.8 * Math.sin(((pulse + 50) * Math.PI) / 50);
+  const coreGlow = 20 + 15 * Math.sin((pulse * Math.PI) / 25);
   return (
     <div className="relative w-24 h-24">
       {/* Outer decorative ring */}
@@ -40,27 +40,27 @@ export function HudArcReactor() {
         <line 
           x1="8" y1="48" x2="20" y2="48" 
           stroke={`hsl(var(--primary) / ${pulseOpacity1})`} 
-          strokeWidth="1.5"
-          style={{ filter: `drop-shadow(0 0 3px hsl(var(--primary) / ${pulseOpacity1}))` }}
+          strokeWidth="2"
+          style={{ filter: `drop-shadow(0 0 6px hsl(var(--primary) / ${pulseOpacity1}))` }}
         />
         <line 
           x1="76" y1="48" x2="88" y2="48" 
           stroke={`hsl(var(--primary) / ${pulseOpacity1})`} 
-          strokeWidth="1.5"
-          style={{ filter: `drop-shadow(0 0 3px hsl(var(--primary) / ${pulseOpacity1}))` }}
+          strokeWidth="2"
+          style={{ filter: `drop-shadow(0 0 6px hsl(var(--primary) / ${pulseOpacity1}))` }}
         />
         {/* Tech lines - vertical (pulsing with offset) */}
         <line 
           x1="48" y1="8" x2="48" y2="20" 
           stroke={`hsl(var(--primary) / ${pulseOpacity2})`} 
-          strokeWidth="1.5"
-          style={{ filter: `drop-shadow(0 0 3px hsl(var(--primary) / ${pulseOpacity2}))` }}
+          strokeWidth="2"
+          style={{ filter: `drop-shadow(0 0 6px hsl(var(--primary) / ${pulseOpacity2}))` }}
         />
         <line 
           x1="48" y1="76" x2="48" y2="88" 
           stroke={`hsl(var(--primary) / ${pulseOpacity2})`} 
-          strokeWidth="1.5"
-          style={{ filter: `drop-shadow(0 0 3px hsl(var(--primary) / ${pulseOpacity2}))` }}
+          strokeWidth="2"
+          style={{ filter: `drop-shadow(0 0 6px hsl(var(--primary) / ${pulseOpacity2}))` }}
         />
         {/* Diagonal tech lines (pulsing with different offset) */}
         <line 
@@ -154,7 +154,7 @@ export function HudArcReactor() {
         <div 
           className="absolute inset-6 rounded-full border border-primary/60 bg-primary/20"
           style={{
-            boxShadow: `0 0 ${15 + 10 * Math.sin((pulse * Math.PI) / 25)}px hsl(var(--primary)), inset 0 0 10px hsl(var(--primary) / 0.5)`
+            boxShadow: `0 0 ${coreGlow}px hsl(var(--primary)), inset 0 0 15px hsl(var(--primary) / 0.6)`
           }}
         >
           <div className="absolute inset-2 rounded-full bg-primary/30 animate-pulse" />
